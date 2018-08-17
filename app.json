@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "my-new-project",
-    "description": "A very interesting project.",
+    "name": "go-driver",
+    "description": "Driver application for peer transportation.",
     "slug": "my-new-project",
     "privacy": "public",
     "sdkVersion": "28.0.0",
@@ -12,7 +12,7 @@
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#4285f4"
+      "backgroundColor": "#489823"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

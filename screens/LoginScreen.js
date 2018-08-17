@@ -1,3 +1,29 @@
+// import React, { Component, PropTypes } from "react";
+// import AuthLayout from "../components/layouts/AuthLayout";
+// import { InputInline, Clearfix, ButtonInline } from "../components/elements";
+
+// export default class App extends Component {
+//   render() {
+//     return (
+//       <AuthLayout
+//         title="Login"
+//         onBack={() => this.props.navigation.goBack(null)}
+//       >
+//         <InputInline first label="First Name" placeholder="Tung" />
+//         <InputInline label="Last Name" placeholder="Phan" />
+//         <InputInline label="Email" placeholder="Email address" />
+//         <InputInline label="Password" placeholder="Required" />
+//         <Clearfix height={16} />
+//         <ButtonInline
+//           onPress={() => this.props.navigation.navigate("Dashboard")}
+//         >
+//           Register
+//         </ButtonInline>
+//       </AuthLayout>
+//     );
+//   }
+// }
+
 import React, { Component } from 'react';
 import { Alert, Button, Text, TextInput, View, StyleSheet, 
 Platform, StatusBar} from 'react-native';
@@ -69,17 +95,17 @@ export default class App extends Component {
             secureTextEntry={true}
             style={styles.input}
           />
-          <Text style={styles.asText}>
+          {/* <Text style={styles.asText}>
             {this.state.asText}
-          </Text>
+          </Text> */}
           <Button
             title={'Login'}
             style={styles.input}
             onPress={() => this.props.navigation.navigate('Home')}
           />
-          <Text style={styles.forgotText}>
+          {/* <Text style={styles.forgotText}>
             {this.state.forgotText}
-          </Text>
+          </Text> */}
         </View>
       );
     }
@@ -120,37 +146,37 @@ const styles = StyleSheet.create({
   greetText: {
     fontSize: 30,
     fontFamily: 'regular',
-    color: '#fff',
+    color: '#370B0B',
     marginBottom: 24,
   },
   loginText: {
     fontFamily: 'semi_bold',
-    color: '#fff',
+    color: '#370B0B',
   },
   forgotText: {
     fontFamily: 'italic',
-    color: '#fff',
+    color: '#370B0B',
   },
   asText: {
     fontSize: 12,
-    color: '#fff',
+    color: '#370B0B',
   },
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#4285f4',
+    backgroundColor: '#489823',
   },
   input: {
     width: 200,
     height: 44,
     padding: 10,
     borderWidth: 1,
-    borderColor: 'white',
+    borderColor: 'black',
     marginBottom: 10,
     fontFamily: 'medium',
     fontSize: 16,
-    color: '#fff',
+    color: '#370B0B',
   },
 });
 

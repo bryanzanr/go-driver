@@ -107,7 +107,7 @@ export default class HomeScreen extends React.Component {
 
   _handleHelpPress = () => {
     WebBrowser.openBrowserAsync(
-      'http://flyit.arsyady.com:8000'
+      'https://go-pay-sea-cfx.herokuapp.com/api/account/'
     );
   };
 }
