@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Alert, Button, Text, TextInput, View, StyleSheet, 
 Platform, StatusBar} from 'react-native';
-import { createStackNavigator } from 'react-navigation';
+// import { createStackNavigator } from 'react-navigation';
 import { AppLoading, Asset, Font, Icon } from 'expo';
-import AppNavigator from '../navigation/AppNavigator';
+// import AppNavigator from '../navigation/AppNavigator';
 
 export default class App extends Component {
   constructor(props) {
@@ -104,7 +104,7 @@ export default class App extends Component {
     ]);
   };
 
-    _handleLoadingError = error => {
+  _handleLoadingError = error => {
     // In this case, you might want to report the error to your error
     // reporting service, for example Sentry
     console.warn(error);

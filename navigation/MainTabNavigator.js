@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform } from 'react-native';
+import { Image, Platform } from 'react-native';
 // import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 import { createSwitchNavigator, createBottomTabNavigator } from 'react-navigation';
 
@@ -15,16 +15,26 @@ const HomeStack = createSwitchNavigator({
   Home: HomeScreen,
 });
 
+// HomeStack.navigationOptions = {
+//   tabBarLabel: 'Driver',
+//   tabBarIcon: ({ focused }) => (
+//     <TabBarIcon
+//       focused={focused}
+//       name={
+//         Platform.OS === 'ios'
+//           ? `ios-information-circle${focused ? '' : '-outline'}`
+//           : 'md-information-circle'
+//       }
+//     />
+//   ),
+// };
 HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
+  tabBarLabel: 'Driver',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
+    <Image
+      source={require('../assets/images/scooter.png')}
+      fadeDuration={0}
+      style={{width: 20, height: 20}}
     />
   ),
 };
@@ -36,12 +46,22 @@ const LinksStack = createSwitchNavigator({
   Links: LinksScreen,
 });
 
+// LinksStack.navigationOptions = {
+//   tabBarLabel: 'Pay',
+//   tabBarIcon: ({ focused }) => (
+//     <TabBarIcon
+//       focused={focused}
+//       name={Platform.OS === 'ios' ? `ios-link${focused ? '' : '-outline'}` : 'md-link'}
+//     />
+//   ),
+// };
 LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
+  tabBarLabel: 'Pay',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? `ios-link${focused ? '' : '-outline'}` : 'md-link'}
+    <Image
+      source={require('../assets/images/money.png')}
+      fadeDuration={0}
+      style={{width: 20, height: 20}}
     />
   ),
 };
@@ -53,12 +73,22 @@ const SettingsStack = createSwitchNavigator({
   Settings: SettingsScreen,
 });
 
+// SettingsStack.navigationOptions = {
+//   tabBarLabel: 'Profile',
+//   tabBarIcon: ({ focused }) => (
+//     <TabBarIcon
+//       focused={focused}
+//       name={Platform.OS === 'ios' ? `ios-options${focused ? '' : '-outline'}` : 'md-options'}
+//     />
+//   ),
+// };
 SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
+  tabBarLabel: 'Profile',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? `ios-options${focused ? '' : '-outline'}` : 'md-options'}
+    <Image
+      source={require('../assets/images/profile.png')}
+      fadeDuration={0}
+      style={{width: 20, height: 20}}
     />
   ),
 };
