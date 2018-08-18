@@ -36,6 +36,7 @@ const Form = t.form.Form;
 const User = t.struct({
   username: t.String,
   password: t.String,
+  repeat_password: t.maybe(t.String),
   is_driver: t.Boolean
 });
 
@@ -81,13 +82,12 @@ const options = {
 export default class App extends React.Component {
   constructor(props){
     super(props);
-    // this.state ={ isLoading: true}
+    this.state ={ isLoading: true}
   }
-
   handleSubmit = () => {
     const value = this._form.getValue();
     if (value === null) return alert('Invalid Login, No input specified.');
-    return fetch('https://go-pay-sea-cfx.herokuapp.com/api/rest-auth/login/', {
+    return fetch('https://go-pay-sea-cfx.herokuapp.com/api/rest-auth/registration/', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -95,7 +95,8 @@ export default class App extends React.Component {
       },
       body: JSON.stringify({
         username: value.username,
-        password: value.password,
+        password1: value.password,
+        password2: value.repeat_password,
       }),
     })
     .then((response) => response.json())
@@ -104,22 +105,16 @@ export default class App extends React.Component {
         dataSource: responseJson.key,
         userId: value.username,
       };
-      if (responseJson.key){
-        if (value.is_driver) this.props.navigation.navigate('Driver', {
-          userToken: token,
-        });
-        else this.props.navigation.navigate('Customer', {
-          userToken: token,
-        });
-      }else{
-        alert('Invalid Login, Please Register first.');
-        this.props.navigation.navigate('Register');
-      }
+      if (value.is_driver) this.props.navigation.navigate('Driver', {
+        userToken: token,
+      });
+      else this.props.navigation.navigate('Customer', {
+        userToken: token,
+      });
       // this.setState({
       //   isLoading: false,
       //   dataSource: responseJson.key,
-      // }, 
-      // function(){
+      // }, function(){
       // });
     })
     .catch((error) =>{
@@ -131,39 +126,35 @@ export default class App extends React.Component {
     // return fetch('https://facebook.github.io/react-native/movies.json')
   // }
   render(){
-    // if(this.state.isLoading){
+    if(this.state.isLoading){
       // return(
       //   <View style={{flex: 1, padding: 20}}>
       //     <ActivityIndicator/>
       //   </View>
       // )
-    return (
-      <View style={styles.container}>
-        <Form 
-          ref={c => this._form = c}
-          type={User} 
-          options={options}
-        />
-        <Button
-          title="Login"
-          onPress={this.handleSubmit}
-        />
-        <Button
-          title="Register"
-          onPress={() => this.props.navigation.navigate('Register')}
+      return (
+        <View style={styles.container}>
+          <Form 
+            ref={c => this._form = c}
+            type={User} 
+            options={options}
+          />
+          <Button
+            title="Register"
+            onPress={this.handleSubmit}
+          />
+        </View>
+      );
+    }
+    return(
+      <View style={{flex: 1, paddingTop:20}}>
+        <FlatList
+          data={this.state.dataSource}
+          renderItem={({item}) => <Text>{item.title}, {item.releaseYear}</Text>}
+          keyExtractor={(item, index) => index}
         />
       </View>
     );
-    // }
-    // return(
-    //   <View style={{flex: 1, paddingTop:20}}>
-    //     <FlatList
-    //       data={this.state.dataSource}
-    //       renderItem={({item}) => <Text>{item.title}, {item.releaseYear}</Text>}
-    //       keyExtractor={(item, index) => index}
-    //     />
-    //   </View>
-    // );
   }
 
   // render() {

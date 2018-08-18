@@ -1,0 +1,86 @@
+{
+  "project_info": {
+    "project_number": "919224519721",
+    "firebase_url": "https://goridepay.firebaseio.com",
+    "project_id": "goridepay",
+    "storage_bucket": "goridepay.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:919224519721:android:826e3b2238b762ad",
+        "android_client_info": {
+          "package_name": "com.denailry.goridepay"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "919224519721-01ulci2fis2b4a36s34cariu8pcfand2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.denailry.goridepay",
+            "certificate_hash": "6d9e3d5a0f3c8acfdcd220a811707c946d81cc13"
+          }
+        },
+        {
+          "client_id": "919224519721-652s3ri2t0u6ria4om0nrebcg7dk0feb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2uvIUOWciGB0HPZH9fHmJN0Y1DvjAjyw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "919224519721-652s3ri2t0u6ria4om0nrebcg7dk0feb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:919224519721:android:1f9674911fb89662",
+        "android_client_info": {
+          "package_name": "com.denailry.goridepay_user"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "919224519721-652s3ri2t0u6ria4om0nrebcg7dk0feb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2uvIUOWciGB0HPZH9fHmJN0Y1DvjAjyw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

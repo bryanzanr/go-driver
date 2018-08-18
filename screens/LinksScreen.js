@@ -1,66 +1,28 @@
-import React from 'react';
-import { FlatList, ActivityIndicator, Text, 
-  View, StyleSheet, Button } from 'react-native';
-// import { ExpoLinksView } from '@expo/samples';
+import React, { Component } from 'react';
+import { Alert, Button, Text, TextInput, View, StyleSheet, 
+Platform, StatusBar} from 'react-native';
+// import { createStackNavigator } from 'react-navigation';
+import { AppLoading, Asset, Font, Icon } from 'expo';
+// import AppNavigator from '../navigation/AppNavigator';
 
-import t from 'tcomb-form-native'; // 0.6.9
-
-const Form = t.form.Form;
-
-const User = t.struct({
-  changed_balance: t.String,
-  description: t.maybe(t.String),
-  account: t.String,
-  finished: t.Boolean
-});
-
-const formStyles = {
-  ...Form.stylesheet,
-  formGroup: {
-    normal: {
-      marginBottom: 10
-    },
-  },
-  controlLabel: {
-    normal: {
-      color: 'blue',
-      fontSize: 18,
-      marginBottom: 7,
-      fontWeight: '600'
-    },
-    // the style applied when a validation error occours
-    error: {
-      color: 'red',
-      fontSize: 18,
-      marginBottom: 7,
-      fontWeight: '600'
-    }
-  }
-}
-
-const options = {
-  fields: {
-    changed_balance: {
-      error: 'You have to define the amount of the balance to refund from your account'
-    },
-    account: {
-      error: 'Fill the account number'
-    },
-    finished: {
-      label: 'Finished',
-    },
-  },
-  stylesheet: formStyles,
-};
-
-export default class LinksScreen extends React.Component {
+export default class LinksScreen extends Component {
   static navigationOptions = {
     title: 'Links',
   };
-
-  constructor(props){
+  
+  constructor(props) {
     super(props);
-    this.state ={ isLoading: true}
+    
+    this.state = {
+      isLoadingComplete: false,
+      username: '',
+      password: '',
+      greetText: 'Welcome',
+      userText: 'Username',
+      passwordText: 'Password',
+      asText: 'Login as',
+      forgotText: 'Forgot Password'
+    };
   }
 
   handleSubmit = () => {
@@ -73,10 +35,9 @@ export default class LinksScreen extends React.Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        changed_balance: 'yourValue',
-        description: 'yourOtherValue',
-        finished: true,
-        account: 10,
+        username: 'yourValue',
+        password: 'yourValue',
+        driver: true,
       }),
     })
     .then((response) => response.json())
@@ -92,66 +53,136 @@ export default class LinksScreen extends React.Component {
     });
   }
 
-  // componentDidMount(){
-    // return fetch('https://facebook.github.io/react-native/movies.json')
-  // }
-  render(){
-    if(this.state.isLoading){
-      // return(
-      //   <View style={{flex: 1, padding: 20}}>
-      //     <ActivityIndicator/>
-      //   </View>
-      // )
+  onLogin() {
+    const { username, password } = this.state;
+    // Listen for authentication state to change.
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user != null) {
+        console.log("We are authenticated now!");
+      }
+
+      // Do other things
+    });
+    // Alert.alert('Credentials', `${username} + ${password}`);
+  }
+
+  render() {
+    if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
+      return (
+        <AppLoading
+          startAsync={this._loadResourcesAsync}
+          onError={this._handleLoadingError}
+          onFinish={this._handleFinishLoading}
+        />
+      );
+    } else {
       return (
         <View style={styles.container}>
-          <Form 
-            ref={c => this._form = c}
-            type={User} 
-            options={options}
+          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+          <Text style={styles.greetText}>
+            {this.state.greetText}
+          </Text>
+          <Text style={styles.loginText}>
+            {this.state.userText}
+          </Text>
+          <TextInput
+            value={this.state.username}
+            onChangeText={(username) => this.setState({ username })}
+            placeholder={'Username'}
+            style={styles.input}
           />
+          <Text style={styles.loginText}>
+            {this.state.passwordText}
+          </Text>
+          <TextInput
+            value={this.state.password}
+            onChangeText={(password) => this.setState({ password })}
+            placeholder={'Password'}
+            secureTextEntry={true}
+            style={styles.input}
+          />
+          {/* <Text style={styles.asText}>
+            {this.state.asText}
+          </Text> */}
           <Button
-            title="Refund"
+            title={'Login'}
+            style={styles.input}
             onPress={this.handleSubmit}
           />
+          {/* <Text style={styles.forgotText}>
+            {this.state.forgotText}
+          </Text> */}
         </View>
       );
     }
-    return(
-      <View style={{flex: 1, paddingTop:20}}>
-        <FlatList
-          data={this.state.dataSource}
-          renderItem={({item}) => <Text>{item.title}, {item.releaseYear}</Text>}
-          keyExtractor={(item, index) => index}
-        />
-      </View>
-    );
   }
 
-  // render() {
-  //   return (
-  //     <ScrollView style={styles.container}>
-  //       {/* Go ahead and delete ExpoLinksView and replace it with your
-  //          * content, we just wanted to provide you with some helpful links */}
-  //       <ExpoLinksView />
-  //     </ScrollView>
-  //   );
-  // }
+  _loadResourcesAsync = async () => {
+    return Promise.all([
+      // Asset.loadAsync([
+      //   require('./assets/images/robot-dev.png'),
+      //   require('./assets/images/robot-prod.png'),
+      // ]),
+      Font.loadAsync({
+        // This is the font that we are using for our tab bar
+        // ...Icon.Ionicons.font,
+        // We include SpaceMono because we use it in HomeScreen.js. Feel free
+        // to remove this if you are not using it in your app
+        'italic': require('../assets/fonts/italic.ttf'),
+        'semi_bold': require('../assets/fonts/semi_bold.ttf'),
+        'regular': require('../assets/fonts/regular.ttf'),
+        'medium': require('../assets/fonts/medium.ttf'),
+      }),
+    ]);
+  };
+
+  _handleLoadingError = error => {
+    // In this case, you might want to report the error to your error
+    // reporting service, for example Sentry
+    console.warn(error);
+  };
+
+  _handleFinishLoading = () => {
+    this.setState({ isLoadingComplete: true });
+  };
+
 }
 
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     paddingTop: 15,
-//     backgroundColor: '#fff',
-//   },
-// });
-
 const styles = StyleSheet.create({
+  greetText: {
+    fontSize: 30,
+    fontFamily: 'regular',
+    color: '#370B0B',
+    marginBottom: 24,
+  },
+  loginText: {
+    fontFamily: 'semi_bold',
+    color: '#370B0B',
+  },
+  forgotText: {
+    fontFamily: 'italic',
+    color: '#370B0B',
+  },
+  asText: {
+    fontSize: 12,
+    color: '#370B0B',
+  },
   container: {
+    flex: 1,
+    alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 50,
-    padding: 20,
     backgroundColor: '#ffffff',
+  },
+  input: {
+    width: 200,
+    height: 44,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: 'black',
+    marginBottom: 10,
+    fontFamily: 'medium',
+    fontSize: 16,
+    color: '#370B0B',
   },
 });
 

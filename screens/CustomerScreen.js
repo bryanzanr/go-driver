@@ -55,10 +55,10 @@ export default class HomeScreen extends React.Component {
           <View style={styles.getStartedContainer}>
             {this._maybeRenderDevelopmentModeWarning()}
 
-            <Text style={styles.getStartedText}>John Doe</Text>
+            <Text style={styles.getStartedText}>Jane Dee</Text>
 
             <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-              <MonoText style={styles.codeHighlightText}>Driver</MonoText>
+              <MonoText style={styles.codeHighlightText}>Customer</MonoText>
             </View>
 
           </View>
@@ -71,10 +71,10 @@ export default class HomeScreen extends React.Component {
         </ScrollView>
 
         <View style={styles.tabBarInfoContainer}>
-          <Text style={styles.tabBarInfoText}>Driver Side</Text>
+          <Text style={styles.tabBarInfoText}>Customer Side</Text>
 
           <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-            <MonoText style={styles.codeHighlightText}>Receive Ride Transaction based
+            <MonoText style={styles.codeHighlightText}>Send Ride Transaction based
             on Preference and Position</MonoText>
           </View>
         </View>
